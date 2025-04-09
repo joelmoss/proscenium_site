@@ -3,6 +3,9 @@
 require 'gems'
 
 class PackagesController < ActionController::API
+  rate_limit to: 10, within: 1.second, name: 'short-term'
+  rate_limit to: 100, within: 2.minutes, name: 'long-term'
+
   rescue_from Proscenium::Registry::PackageUnsupportedError, with: :render_not_found
   rescue_from ::Gems::NotFound, with: :render_not_found
 
