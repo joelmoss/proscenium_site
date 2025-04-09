@@ -3,6 +3,7 @@
 source 'https://rubygems.org'
 
 gem 'bootsnap', require: false
+gem 'gems'
 gem 'kamal', require: false
 gem 'proscenium'
 gem 'puma', '>= 5.0'

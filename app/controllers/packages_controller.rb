@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require 'rubygems/package'
+require 'gems'
 
 class PackagesController < ActionController::API
   rescue_from Proscenium::Registry::PackageUnsupportedError, with: :render_not_found
-  rescue_from Gems::NotFound, with: :render_not_found
+  rescue_from ::Gems::NotFound, with: :render_not_found
 
   def index = render json: {}
 
