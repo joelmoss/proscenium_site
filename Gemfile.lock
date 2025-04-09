@@ -364,6 +364,7 @@ DEPENDENCIES
   debug
   gems
   kamal
+  phlex-rails (~> 1)
   proscenium
   puma (>= 5.0)
   rails (~> 8.0.2)

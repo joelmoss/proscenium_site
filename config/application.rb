@@ -25,6 +25,10 @@ module ProsceniumSite
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 8.0
 
+    config.autoload_paths << "#{root}/app/views"
+    config.autoload_paths << "#{root}/app/views/layouts"
+    config.autoload_paths << "#{root}/app/components"
+
     config.hosts << 'proscenium.test'
     config.hosts << 'registry.proscenium.test'
 

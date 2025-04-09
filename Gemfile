@@ -5,6 +5,7 @@ source 'https://rubygems.org'
 gem 'bootsnap', require: false
 gem 'gems'
 gem 'kamal', require: false
+gem 'phlex-rails', '~> 1'
 gem 'proscenium'
 gem 'puma', '>= 5.0'
 gem 'rails', '~> 8.0.2'

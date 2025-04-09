@@ -9,4 +9,6 @@ Rails.application.routes.draw do
     get '' => 'packages#index'
     get ':package(/:version)' => 'packages#show', package: %r{[^/]+(/[^/]+)?}, version: %r{[^/]+}
   end
+
+  root to: 'pages#index'
 end
