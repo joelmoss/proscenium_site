@@ -5,6 +5,9 @@ require 'active_support/core_ext/integer/time'
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  config.hosts << 'proscenium.rocks'
+  config.hosts << 'registry.proscenium.rocks'
+
   # Code is not reloaded between requests.
   config.enable_reloading = false
 
