@@ -7,8 +7,8 @@ Rails.application.configure do
 
   config.proscenium.cache_query_string = ENV.fetch('HEROKU_RELEASE_VERSION', nil)
 
-  config.hosts << 'proscenium.rocks'
-  config.hosts << 'registry.proscenium.rocks'
+  # config.hosts << 'proscenium.rocks'
+  # config.hosts << 'registry.proscenium.rocks'
 
   # Code is not reloaded between requests.
   config.enable_reloading = false
