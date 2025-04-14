@@ -2,6 +2,8 @@
 
 source 'https://rubygems.org'
 
+ruby file: '.ruby-version'
+
 gem 'bootsnap', require: false
 gem 'gems'
 gem 'phlex-rails', '~> 1'
