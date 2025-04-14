@@ -20,6 +20,11 @@ servers:
 proxy:
   ssl: true
   host: proscenium.rocks
+  forward_headers: true
+  healthcheck:
+    interval: 3
+    path: /up
+    timeout: 3
 
 # Credentials for your image host.
 registry:
