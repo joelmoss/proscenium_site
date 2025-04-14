@@ -4,16 +4,16 @@ source 'https://rubygems.org'
 
 ruby file: '.ruby-version'
 
+gem 'aws-sdk-s3', require: false
 gem 'bootsnap', require: false
 gem 'gems'
+gem 'kamal'
 gem 'phlex-rails', '~> 1'
-gem 'proscenium'
+gem 'proscenium' # , path: '../proscenium'
 gem 'puma', '>= 5.0'
 gem 'rails', '~> 8.0.2'
 gem 'sqlite3'
 gem 'tzinfo-data', platforms: %i[windows jruby]
-
-gem 'aws-sdk-s3', require: false
 
 group :development, :test do
   gem 'brakeman', require: false
