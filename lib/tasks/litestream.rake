@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 LITESTREAM_CONFIG = ENV['LITESTREAM_CONFIG'] || Rails.root.join('tmp/litestream.yml').to_s
 
-LITESTREAM_TEMPLATE = <<~EOF
+LITESTREAM_TEMPLATE = <<~YAML
   # This is the configuration file for litestream.
   #
   # For more details, see: https://litestream.io/reference/config/
@@ -16,7 +18,7 @@ LITESTREAM_TEMPLATE = <<~EOF
           access-key-id: $AWS_ACCESS_KEY_ID
           secret-access-key: $AWS_SECRET_ACCESS_KEY
   <% end -%>
-EOF
+YAML
 
 namespace :litestream do
   task prepare: 'db:load_config' do

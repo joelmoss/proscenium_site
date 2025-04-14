@@ -65,11 +65,13 @@ COPY --from=build /rails /rails
 RUN groupadd --system --gid 1000 rails && \
     useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash && \
     mkdir /data && \
-    chown -R 1000:1000 db log storage tmp /data
+    chown -R 1000:1000 db log storage tmp public/assets public/proscenium_registry_tarballs /data
 USER 1000:1000
 
 # Deployment options
-ENV DATABASE_URL="sqlite3:///data/production.sqlite3"
+ENV DATABASE_URL="sqlite3:///data/production.sqlite3" \
+    RUBY_YJIT_ENABLE="1"
+    REVISION=$GIT_REVISION
 
 # Entrypoint prepares the database.
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]

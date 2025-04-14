@@ -13,6 +13,11 @@ gem 'sqlite3'
 gem 'thruster', require: false
 gem 'tzinfo-data', platforms: %i[windows jruby]
 
+gem 'aws-sdk-s3', '~> 1.183', require: false
+gem 'litestream', '~> 0.12.0'
+gem 'sentry-rails', '~> 5.23'
+gem 'sentry-ruby', '~> 5.23'
+
 group :development, :test do
   gem 'brakeman', require: false
   gem 'debug', platforms: %i[mri windows], require: 'debug/prelude'
@@ -21,11 +26,6 @@ group :development, :test do
 end
 
 group :development do
+  gem 'dockerfile-rails', '>= 1.7'
   gem 'web-console'
 end
-
-gem "dockerfile-rails", ">= 1.7", group: :development
-
-gem "litestream", "~> 0.12.0"
-
-gem "aws-sdk-s3", "~> 1.183", require: false
