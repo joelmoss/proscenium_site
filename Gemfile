@@ -13,6 +13,7 @@ gem 'proscenium' # , path: '../proscenium'
 gem 'puma', '>= 5.0'
 gem 'rails', '~> 8.0.2'
 gem 'sqlite3'
+gem 'thruster'
 gem 'tzinfo-data', platforms: %i[windows jruby]
 
 group :development, :test do
