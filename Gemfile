@@ -14,7 +14,6 @@ gem 'sqlite3'
 gem 'tzinfo-data', platforms: %i[windows jruby]
 
 gem 'aws-sdk-s3', require: false
-gem 'sentry-rails'
 
 group :development, :test do
   gem 'brakeman', require: false
@@ -30,4 +29,6 @@ end
 
 group :production do
   gem 'cloudflare-rails'
+  gem 'sentry-rails'
+  gem 'sentry-ruby'
 end

@@ -373,6 +373,7 @@ DEPENDENCIES
   rubocop-performance
   rubocop-rails
   sentry-rails
+  sentry-ruby
   sqlite3
   tzinfo-data
   web-console
