@@ -24,5 +24,10 @@ group :development, :test do
 end
 
 group :development do
+  gem 'parity'
   gem 'web-console'
+end
+
+group :production do
+  gem 'cloudflare-rails'
 end
