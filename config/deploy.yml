@@ -20,6 +20,7 @@ servers:
 proxy:
   ssl: true
   host: proscenium.rocks
+  app_port: 3000
   forward_headers: true
   healthcheck:
     interval: 3

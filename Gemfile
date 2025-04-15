@@ -29,7 +29,7 @@ group :development do
 end
 
 group :production do
-  gem 'cloudflare-rails'
+  # gem 'cloudflare-rails'
   gem 'sentry-rails'
   gem 'sentry-ruby'
 end
