@@ -38,13 +38,13 @@ class Registry::Package < ApplicationRecord
 
   def as_json
     {
-      name:,
+      name: full_name,
       'dist-tags': {
         latest: version
       },
       versions: {
         version => {
-          name:,
+          name: full_name,
           version:,
           dependencies: package_json['dependencies'] || {},
           dist: {
@@ -57,15 +57,18 @@ class Registry::Package < ApplicationRecord
     }
   end
 
-  def package_json
-    @package_json ||= JSON.parse(package_data)
-  end
+  def full_name = @full_name ||= "@rubygems/#{name}"
+  def package_json = @package_json ||= JSON.parse(package_data)
 
   private
 
   def fetch_package_json
     path = Registry::RubyGems.path_for(name, version).join('package.json')
-    self.package_data = path.exist? ? path.read : { name:, version:, dependencies: {} }.to_json
+    self.package_data = if path.exist?
+                          path.read
+                        else
+                          { name: full_name, version:, dependencies: {} }.to_json
+                        end
   end
 
   def create_tarball
