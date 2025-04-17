@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   scope defaults: { format: 'json' }, constraints: { subdomain: 'registry' } do
     get '' => 'packages#index'
-    get ':package(/:version)' => 'packages#show', package: %r{[^/]+(/[^/]+)?}, version: %r{[^/]+}
+    get '@rubygems/:name(/:version)' => 'packages#show', name: %r{[^/]+}, version: %r{[^/]+}
   end
 
   root to: 'pages#index'

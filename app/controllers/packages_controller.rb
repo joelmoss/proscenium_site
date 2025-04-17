@@ -6,20 +6,21 @@ class PackagesController < ActionController::API
   rate_limit to: 10, within: 1.second, name: 'short-term'
   rate_limit to: 100, within: 2.minutes, name: 'long-term'
 
-  rescue_from Proscenium::Registry::PackageUnsupportedError, with: :render_not_found
-  rescue_from ::Gems::NotFound, with: :render_not_found
+  rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
   def index = render json: {}
 
   def show
-    host = "#{request.protocol}#{request.host_with_port}"
-    render json: Proscenium::Registry.ruby_gem_package(params[:package], params[:version], host:)
-                                     .as_json
+    render json: Registry::Package.finreate!(package_params[:name], package_params[:version])
   end
 
   private
 
-  def render_not_found(message = 'Not found')
+  def render_not_found(message)
     render json: { error: message }, status: :not_found
+  end
+
+  def package_params
+    @package_params ||= params.permit(:name, :version)
   end
 end

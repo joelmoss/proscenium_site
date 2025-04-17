@@ -18,10 +18,18 @@ gem 'thruster'
 gem 'tzinfo-data', platforms: %i[windows jruby]
 
 group :development, :test do
+  gem 'amazing_print'
   gem 'brakeman', require: false
   gem 'debug', platforms: %i[mri windows], require: 'debug/prelude'
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
+end
+
+group :test do
+  gem 'maxitest'
+  gem 'minitest-focus'
+  gem 'minitest-spec-rails'
+  gem 'webmock'
 end
 
 group :development do

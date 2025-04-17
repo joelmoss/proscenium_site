@@ -37,3 +37,7 @@
 /public/proscenium_registry_tarballs/*
 !/public/proscenium_registry_tarballs/.keep
 /ssl
+
+/config/credentials/development.key
+
+/config/credentials/production.key
