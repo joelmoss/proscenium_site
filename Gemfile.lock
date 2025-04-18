@@ -154,7 +154,8 @@ GEM
       zeitwerk (>= 2.6.18, < 3.0)
     language_server-protocol (3.17.0.4)
     lint_roller (1.1.0)
-    literal (1.6.0)
+    literal (1.7.1)
+      zeitwerk
     logger (1.7.0)
     loofah (2.24.0)
       crass (~> 1.0.2)
@@ -416,7 +417,7 @@ DEPENDENCIES
   debug
   gems
   kamal
-  literal (~> 1.6.0)
+  literal (~> 1.7.1)
   maxitest
   minitest-focus
   minitest-spec-rails
