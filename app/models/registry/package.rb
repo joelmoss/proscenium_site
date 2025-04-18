@@ -1,5 +1,13 @@
 # frozen_string_literal: true
 
+# 1. Fetch the gem metadata from RubyGems API.
+# 2. Extract any package.json from the gem, and populate the response with it.
+# 3. Create a tarball containing the fetched package.json. This will be downloaded by the npm
+#    client, and unpacked into node_modules. Proscenium ignores the contents, as it will fetch them
+#    directly from location of the installed gem.
+# 4. Return a valid npm response listing package details, tarball location, and its dependencies.
+#
+# See https://wiki.commonjs.org/wiki/Packages/Registry
 class Registry::Package < ApplicationRecord
   class << self
     def finreate!(name, version = nil)

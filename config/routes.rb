@@ -5,9 +5,10 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get 'up' => 'rails/health#show', as: :rails_health_check
 
-  scope defaults: { format: 'json' }, constraints: { subdomain: 'registry' } do
-    get '' => 'packages#index'
-    get '@rubygems/:name(/:version)' => 'packages#show', name: %r{[^/]+}, version: %r{[^/]+}
+  scope defaults: { format: 'json' }, controller: :packages,
+        constraints: { subdomain: 'registry' } do
+    get '', action: :index
+    get '*package', action: :show, package: /.+/
   end
 
   root to: 'pages#index'

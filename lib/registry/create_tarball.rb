@@ -7,7 +7,7 @@ class Registry::CreateTarball
     @package = package
 
     create!
-    upload!
+    upload! unless Rails.env.test?
   end
 
   def shasum = Digest::SHA1.file(tmp_filepath).hexdigest
@@ -60,5 +60,10 @@ class Registry::CreateTarball
   def secret_access_key = Rails.application.credentials.cloudflare_r2.secret_access_key!
   def account_id = Rails.application.credentials.cloudflare_r2.account_id!
   def bucket_name = Rails.application.credentials.cloudflare_r2.bucket_name!
-  def bucket_url = Rails.application.credentials.cloudflare_r2.public_bucket_url!
+
+  def bucket_url
+    return 'bucket.url' if Rails.env.test?
+
+    Rails.application.credentials.cloudflare_r2.public_bucket_url!
+  end
 end

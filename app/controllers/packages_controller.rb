@@ -11,7 +11,7 @@ class PackagesController < ActionController::API
   def index = render json: {}
 
   def show
-    render json: Registry::Package.finreate!(package_params[:name], package_params[:version])
+    render json: Registry::Package.finreate!(*package_params)
   end
 
   private
@@ -21,6 +21,12 @@ class PackagesController < ActionController::API
   end
 
   def package_params
-    @package_params ||= params.permit(:name, :version)
+    @package_params ||= params.expect(:package).then do |it|
+      unless (res = it.gsub('%2F', '/').match(%r{^@rubygems/([\w\-_]+)/?([\w\-._]+)?$}))
+        raise ActiveRecord::RecordNotFound, "Couldn't find Gem '#{it}'"
+      end
+
+      [res[1], res[2]]
+    end
   end
 end
