@@ -132,6 +132,7 @@ GEM
     globalid (1.2.1)
       activesupport (>= 6.1)
     hashdiff (1.1.2)
+    htmlbeautifier (1.4.3)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
     io-console (0.8.0)
@@ -216,6 +217,9 @@ GEM
     phlex-rails (1.2.2)
       phlex (>= 1.10, < 2)
       railties (>= 6.1, < 9)
+    phlexible (2.2.0)
+      phlex (>= 1.10.0, < 2.0.0)
+      phlex-rails (>= 1.2.1, < 2.0.0)
     phonelib (0.10.7)
     pp (0.6.2)
       prettyprint
@@ -310,6 +314,7 @@ GEM
       io-console (~> 0.5)
     require-hooks (0.2.2)
     rexml (3.4.1)
+    rouge (4.5.1)
     rubocop (1.75.2)
       json (~> 2.3)
       language_server-protocol (~> 3.17.0.2)
@@ -420,6 +425,7 @@ DEPENDENCIES
   brakeman
   debug
   gems
+  htmlbeautifier
   kamal
   literal (~> 1.6.0)
   markly
@@ -428,9 +434,11 @@ DEPENDENCIES
   minitest-spec-rails
   parity
   phlex-rails (~> 1)
+  phlexible
   proscenium
   puma (>= 5.0)
   rails (~> 8.0.2)
+  rouge
   rubocop-minitest
   rubocop-performance
   rubocop-rails

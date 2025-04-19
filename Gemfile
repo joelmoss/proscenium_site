@@ -7,13 +7,16 @@ source 'https://rubygems.org'
 gem 'aws-sdk-s3', require: false
 gem 'bootsnap', require: false
 gem 'gems'
+gem 'htmlbeautifier'
 gem 'kamal'
 gem 'literal', '~> 1.6.0'
 gem 'markly'
+gem 'phlexible'
 gem 'phlex-rails', '~> 1'
 gem 'proscenium' # , path: '../proscenium'
 gem 'puma', '>= 5.0'
 gem 'rails', '~> 8.0.2'
+gem 'rouge'
 gem 'sqlite3'
 gem 'thruster'
 gem 'tzinfo-data', platforms: %i[windows jruby]
