@@ -8,7 +8,7 @@ gem 'aws-sdk-s3', require: false
 gem 'bootsnap', require: false
 gem 'gems'
 gem 'kamal'
-gem 'literal', '~> 1.6.0'
+gem 'literal', '~> 1.7.1'
 gem 'phlex-rails', '~> 1'
 gem 'proscenium' # , path: '../proscenium'
 gem 'puma', '>= 5.0'
