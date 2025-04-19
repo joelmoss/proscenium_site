@@ -9,6 +9,7 @@ gem 'bootsnap', require: false
 gem 'gems'
 gem 'kamal'
 gem 'literal', '~> 1.6.0'
+gem 'markly'
 gem 'phlex-rails', '~> 1'
 gem 'proscenium' # , path: '../proscenium'
 gem 'puma', '>= 5.0'
@@ -21,6 +22,7 @@ group :development, :test do
   gem 'amazing_print'
   gem 'brakeman', require: false
   gem 'debug', platforms: %i[mri windows], require: 'debug/prelude'
+  gem 'rubocop-minitest', require: false
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
 end
