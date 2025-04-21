@@ -16,17 +16,17 @@ class PackagesController < ActionController::API
 
   private
 
-  def render_not_found(message)
-    render json: { error: message }, status: :not_found
-  end
-
-  def package_params
-    @package_params ||= params.expect(:package).then do |it|
-      unless (res = it.gsub('%2F', '/').match(%r{^@rubygems/([\w\-_]+)/?([\w\-._]+)?$}))
-        raise ActiveRecord::RecordNotFound, "Couldn't find Gem '#{it}'"
-      end
-
-      [res[1], res[2]]
+    def render_not_found(message)
+      render json: { error: message }, status: :not_found
     end
-  end
+
+    def package_params
+      @package_params ||= params.expect(:package).then do |it|
+        unless (res = it.gsub('%2F', '/').match(%r{^@rubygems/([\w\-_]+)/?([\w\-._]+)?$}))
+          raise ActiveRecord::RecordNotFound, "Couldn't find Gem '#{it}'"
+        end
+
+        [res[1], res[2]]
+      end
+    end
 end

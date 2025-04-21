@@ -4,6 +4,8 @@ plugins:
 
 Layout/LineLength:
   Max: 100
+Layout/IndentationConsistency:
+  EnforcedStyle: indented_internal_methods
 
 Metrics:
   Enabled: false

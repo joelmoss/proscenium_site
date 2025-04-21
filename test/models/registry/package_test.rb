@@ -64,21 +64,21 @@ class Registry::PackageTest < ActiveSupport::TestCase
 
   private
 
-  def stub_gem(name, version: nil, latest_version: nil)
-    if version.blank? && latest_version.blank?
-      raise ArgumentError, 'One of `version` or `latest_version` is required'
-    end
+    def stub_gem(name, version: nil, latest_version: nil)
+      if version.blank? && latest_version.blank?
+        raise ArgumentError, 'One of `version` or `latest_version` is required'
+      end
 
-    if version.present? && latest_version.present?
-      raise ArgumentError, 'Only one of `version` or `latest_version` is accepted'
-    end
+      if version.present? && latest_version.present?
+        raise ArgumentError, 'Only one of `version` or `latest_version` is accepted'
+      end
 
-    if version
-      stub_request(:get, "https://rubygems.org/api/v2/rubygems/#{name}/versions/#{version}.json")
-        .to_return_json(body: { version: })
-    elsif latest_version
-      stub_request(:get, "https://rubygems.org/api/v1/gems/#{name}.json")
-        .to_return_json(body: { version: latest_version })
+      if version
+        stub_request(:get, "https://rubygems.org/api/v2/rubygems/#{name}/versions/#{version}.json")
+          .to_return_json(body: { version: })
+      elsif latest_version
+        stub_request(:get, "https://rubygems.org/api/v1/gems/#{name}.json")
+          .to_return_json(body: { version: latest_version })
+      end
     end
-  end
 end

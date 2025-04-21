@@ -33,13 +33,13 @@ class Registry::Package < ApplicationRecord
 
     private
 
-    def gemspec(name, version = nil)
-      version.present? ? Gems::V2.info(name, version) : Gems.info(name)
-    rescue Gems::NotFound => e
-      msg = "Couldn't find Gem '#{name}'"
-      msg << " with version '#{version}'" if version.present?
-      raise ActiveRecord::RecordNotFound.new(msg), cause: e
-    end
+      def gemspec(name, version = nil)
+        version.present? ? Gems::V2.info(name, version) : Gems.info(name)
+      rescue Gems::NotFound => e
+        msg = "Couldn't find Gem '#{name}'"
+        msg << " with version '#{version}'" if version.present?
+        raise ActiveRecord::RecordNotFound.new(msg), cause: e
+      end
   end
 
   before_create :fetch_package_json, :create_tarball
@@ -70,19 +70,19 @@ class Registry::Package < ApplicationRecord
 
   private
 
-  def fetch_package_json
-    path = Registry::RubyGems.path_for(name, version).join('package.json')
-    self.package_data = if path.exist?
-                          path.read
-                        else
-                          { name: full_name, version:, dependencies: {} }.to_json
-                        end
-  end
+    def fetch_package_json
+      path = Registry::RubyGems.path_for(name, version).join('package.json')
+      self.package_data = if path.exist?
+                            path.read
+                          else
+                            { name: full_name, version:, dependencies: {} }.to_json
+                          end
+    end
 
-  def create_tarball
-    ball = Registry::CreateTarball.new(self)
-    self.tarball = ball.tarball
-    self.integrity = ball.integrity
-    self.shasum = ball.shasum
-  end
+    def create_tarball
+      ball = Registry::CreateTarball.new(self)
+      self.tarball = ball.tarball
+      self.integrity = ball.integrity
+      self.shasum = ball.shasum
+    end
 end
