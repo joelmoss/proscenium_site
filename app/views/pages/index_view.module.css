@@ -5,7 +5,20 @@ body {
 
 .base {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
+
+  a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    margin-top: 12px;
+    border-bottom: 2px solid transparent;
+
+    &:hover {
+      border-bottom-color: white;
+    }
+  }
 }
