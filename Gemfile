@@ -2,14 +2,14 @@
 
 source 'https://rubygems.org'
 
-# ruby file: '.ruby-version'
+ruby file: '.ruby-version'
 
 gem 'aws-sdk-s3', require: false
 gem 'bootsnap', require: false
 gem 'gems'
 gem 'htmlbeautifier'
 gem 'kamal'
-gem 'literal', '~> 1.6.0'
+gem 'literal'
 gem 'markly'
 gem 'phlexible'
 gem 'phlex-rails', '~> 1'
