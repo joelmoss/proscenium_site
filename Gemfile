@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-ruby file: '.ruby-version'
+ruby file: './.ruby-version'
 
 gem 'aws-sdk-s3', require: false
 gem 'bootsnap', require: false
