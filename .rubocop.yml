@@ -1,19 +1,54 @@
 plugins:
-  - rubocop-performance
   - rubocop-rails
+  - rubocop-minitest
+  - rubocop-disable_syntax
+  - rubocop-performance
+
+AllCops:
+  TargetRubyVersion: 4.0
+  NewCops: enable
+  SuggestExtensions: false
+  # This configuration should be kept in sync with `config/bootsnap.rb`
+  StringLiteralsFrozenByDefault: true
+  Exclude:
+    - "gemfiles/**/*"
+    - "vendor/**/*"
+    - "node_modules/**/*"
+    - "db/schema.rb"
+    - "tmp/**/*"
 
 Layout/LineLength:
   Max: 100
 Layout/IndentationConsistency:
   EnforcedStyle: indented_internal_methods
 
+Lint/ConstantDefinitionInBlock:
+  Exclude:
+    - "test/**/*"
+Lint/ItWithoutArgumentsInBlock:
+  Enabled: false
+Lint/MissingSuper:
+  Enabled: false
+
 Metrics:
   Enabled: false
 
+Style/DisableSyntax:
+  DisableSyntax:
+    - unless
+    - and_or_not
+    - numbered_parameters
+
+Style/CaseEquality:
+  Enabled: false
 Style/Documentation:
   Enabled: false
 Style/ClassAndModuleChildren:
   Enabled: false
+Style/NegatedIf:
+  Enabled: false
 
-Lint/MissingSuper:
+Minitest/EmptyLineBeforeAssertionMethods:
+  Enabled: false
+Minitest/MultipleAssertions:
   Enabled: false

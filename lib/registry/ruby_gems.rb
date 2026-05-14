@@ -18,7 +18,7 @@ module Registry
       dependency = Gem::Dependency.new @name, @version
       path = get_path dependency
 
-      raise "Gem '#{@name}' not installed nor fetchable." unless path
+      raise "Gem '#{@name}' not installed nor fetchable." if !path
 
       basename = File.basename path, '.gem'
       target_dir = File.expand_path basename, Rails.root.join('tmp/unpacked_gems')
@@ -46,14 +46,14 @@ module Registry
       specs = dependency.matching_specs
       selected = specs.max_by(&:version)
 
-      return Gem::RemoteFetcher.fetcher.download_to_cache(dependency) unless selected
-      return unless /^#{selected.name}$/i.match?(dependency.name)
+      return Gem::RemoteFetcher.fetcher.download_to_cache(dependency) if !selected
+      return if !/^#{selected.name}$/i.match?(dependency.name)
 
       # We expect to find (basename).gem in the 'cache' directory. Furthermore,
       # the name match must be exact (ignoring case).
       path = find_in_cache File.basename selected.cache_file
 
-      return Gem::RemoteFetcher.fetcher.download_to_cache(dependency) unless path
+      return Gem::RemoteFetcher.fetcher.download_to_cache(dependency) if !path
 
       path
     end

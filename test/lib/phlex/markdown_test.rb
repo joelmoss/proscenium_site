@@ -14,7 +14,7 @@ class Phlex::MarkdownTest < ActiveSupport::TestCase
         ###### 6
       MD
 
-      assert_equal output, '<h1>1</h1><h2>2</h2><h3>3</h3><h4>4</h4><h5>5</h5><h6>6</h6>'
+      assert_equal '<h1>1</h1><h2>2</h2><h3>3</h3><h4>4</h4><h5>5</h5><h6>6</h6>', output
     end
 
     it 'supports ordered lists' do
@@ -24,7 +24,7 @@ class Phlex::MarkdownTest < ActiveSupport::TestCase
         3. Three
       MD
 
-      assert_equal output, '<ol><li>One</li><li>Two</li><li>Three</li></ol>'
+      assert_equal '<ol><li>One</li><li>Two</li><li>Three</li></ol>', output
     end
 
     it 'supports unordered lists' do
@@ -34,12 +34,12 @@ class Phlex::MarkdownTest < ActiveSupport::TestCase
         - Three
       MD
 
-      assert_equal output, '<ul><li>One</li><li>Two</li><li>Three</li></ul>'
+      assert_equal '<ul><li>One</li><li>Two</li><li>Three</li></ul>', output
     end
 
     it 'supports inline code' do
       output = md 'Some `code` here'
-      assert_equal output, '<p>Some <code>code</code> here</p>'
+      assert_equal '<p>Some <code>code</code> here</p>', output
     end
 
     it 'supports block code' do
@@ -51,42 +51,42 @@ class Phlex::MarkdownTest < ActiveSupport::TestCase
         ```
       MD
 
-      assert_equal output, %(<pre><code class="language-ruby">def foo\n\tbar\nend\n</code></pre>)
+      assert_equal %(<pre><code class="language-ruby">def foo\n\tbar\nend\n</code></pre>), output
     end
 
     it 'supports paragraphs' do
       output = md "A\n\nB"
-      assert_equal output, '<p>A</p><p>B</p>'
+      assert_equal '<p>A</p><p>B</p>', output
     end
 
     it 'supports links' do
       output = md "[Hello](world 'title')"
-      assert_equal output, %(<p><a href="world" title="title">Hello</a></p>)
+      assert_equal %(<p><a href="world" title="title">Hello</a></p>), output
     end
 
     it 'supports emphasis' do
       output = md '*Hello*'
-      assert_equal output, '<p><em>Hello</em></p>'
+      assert_equal '<p><em>Hello</em></p>', output
     end
 
     it 'supports strong' do
       output = md '**Hello**'
-      assert_equal output, '<p><strong>Hello</strong></p>'
+      assert_equal '<p><strong>Hello</strong></p>', output
     end
 
     it 'supports blockquotes' do
       output = md '> Hello'
-      assert_equal output, '<blockquote><p>Hello</p></blockquote>'
+      assert_equal '<blockquote><p>Hello</p></blockquote>', output
     end
 
     it 'supports horizontal rules' do
       output = md '---'
-      assert_equal output, '<hr>'
+      assert_equal '<hr>', output
     end
 
     it 'supports images' do
       output = md "![alt](src 'title')"
-      assert_equal output, %(<p><img src="src" alt="alt" title="title"></p>)
+      assert_equal %(<p><img src="src" alt="alt" title="title"></p>), output
     end
 
     it 'supports softbreaks in content as spaces' do
@@ -97,7 +97,7 @@ class Phlex::MarkdownTest < ActiveSupport::TestCase
         Three
       MD
 
-      assert_equal output, '<p>One Two</p><p>Three</p>'
+      assert_equal '<p>One Two</p><p>Three</p>', output
     end
 
     def md(content)

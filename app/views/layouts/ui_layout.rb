@@ -5,7 +5,7 @@ class UILayout < ApplicationLayout
     'Proscenium:UI'
   end
 
-  def around_template(&block)
+  def around_template(&)
     super do
       header do
         div class: :logo do
@@ -15,7 +15,7 @@ class UILayout < ApplicationLayout
       end
 
       div class: :columned do
-        main(&block)
+        main(&)
         div(class: :page_nav) { page_nav } if respond_to?(:page_nav, true)
       end
     end

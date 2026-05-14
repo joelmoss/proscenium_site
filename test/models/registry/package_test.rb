@@ -47,7 +47,7 @@ class Registry::PackageTest < ActiveSupport::TestCase
     it 'uses latest version when none is given' do
       stub_gem('rails', latest_version: '8.0.2')
 
-      assert described_class.finreate!('rails').version == '8.0.2'
+      assert_equal '8.0.2', described_class.finreate!('rails').version
     end
 
     context 'with unknown version' do

@@ -7,7 +7,7 @@ class Registry::CreateTarball
     @package = package
 
     create!
-    upload! unless Rails.env.test?
+    upload! if !Rails.env.test?
   end
 
   def shasum = Digest::SHA1.file(tmp_filepath).hexdigest

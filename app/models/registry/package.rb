@@ -18,7 +18,7 @@ class Registry::Package < ApplicationRecord
       end
 
       if version.present?
-        unless Gem::Version.correct?(version)
+        if !Gem::Version.correct?(version)
           raise ActiveRecord::RecordNotFound,
                 "Couldn't find Gem '#{name}' with version '#{version}'"
         end

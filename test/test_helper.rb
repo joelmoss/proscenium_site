@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 ENV['RAILS_ENV'] ||= 'test'
+
 require_relative '../config/environment'
 require 'rails/test_help'
 require 'maxitest/autorun'
@@ -15,5 +16,10 @@ module ActiveSupport
     fixtures :all
 
     self.use_transactional_tests = true
+
+    class << self
+      alias with context
+      alias without context
+    end
   end
 end

@@ -7,6 +7,7 @@ require 'markly'
 module Phlex
   class Markdown < Phlex::HTML
     extend Literal::Properties
+
     prop :content, String, :positional
 
     def view_template

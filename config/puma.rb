@@ -9,7 +9,8 @@
 #
 # You can control the number of workers using ENV["WEB_CONCURRENCY"]. You
 # should only set this value when you want to run 2 or more workers. The
-# default is already 1.
+# default is already 1. You can set it to `auto` to automatically start a worker
+# for each available processor.
 #
 # The ideal number of threads per worker depends both on how much time the
 # application spends waiting for IO operations and on how much you wish to
@@ -38,10 +39,3 @@ plugin :tmp_restart
 # Specify the PID file. Defaults to tmp/pids/server.pid in development.
 # In other environments, only set the PID file if requested.
 pidfile ENV['PIDFILE'] if ENV['PIDFILE']
-
-if ENV['RAILS_ENV'] == 'development'
-  cert = File.expand_path('./ssl/proscenium.test.pem')
-  key = File.expand_path('./ssl/proscenium.test-key.pem')
-
-  ssl_bind '127.0.0.1', ENV.fetch('SSL_PORT', '3001'), { key:, cert:, verify_mode: 'none' }
-end

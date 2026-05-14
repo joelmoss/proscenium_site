@@ -2,7 +2,7 @@
 
 if defined?(Sentry)
   Sentry.init do |config|
-    config.dsn = ENV['SENTRY_DSN']
+    config.dsn = ENV.fetch('SENTRY_DSN', nil)
     config.environment = Rails.env
 
     config.traces_sample_rate = 1.0

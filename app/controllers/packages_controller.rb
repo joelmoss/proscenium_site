@@ -21,9 +21,9 @@ class PackagesController < ActionController::API
     end
 
     def package_params
-      @package_params ||= params.expect(:package).then do |it|
-        unless (res = it.gsub('%2F', '/').match(%r{^@rubygems/([\w\-_]+)/?([\w\-._]+)?$}))
-          raise ActiveRecord::RecordNotFound, "Couldn't find Gem '#{it}'"
+      @package_params ||= params.expect(:package).then do |x|
+        if !(res = x.gsub('%2F', '/').match(%r{^@rubygems/([\w\-_]+)/?([\w\-._]+)?$}))
+          raise ActiveRecord::RecordNotFound, "Couldn't find Gem '#{x}'"
         end
 
         [res[1], res[2]]
