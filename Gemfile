@@ -8,7 +8,6 @@ gem 'aws-sdk-s3', require: false
 gem 'bootsnap', require: false
 gem 'gems'
 gem 'htmlbeautifier'
-gem 'kamal'
 gem 'literal'
 gem 'markly'
 gem 'phlexible'
