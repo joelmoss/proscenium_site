@@ -21,6 +21,16 @@ import '@rubygems/my_gem/styles.css';
 import '@rubygems/my_gem/scripts.js';
 ```
 
+### Important
+
+The Proscenium Registry relies on Rubygems, so it can only serve assets from gems that are published to Rubygems.org. If you have a gem that is not published, you will need to publish it first before you can use it with the Proscenium Registry.
+
+Also, if your gem has a package.json file, you will need to ensure that is included in the gemspec and that it is properly packaged with the gem. The Proscenium Registry will look for the package.json file to determine how to serve the assets. So be sure to add it to the spec.files in your gemspec:
+
+```ruby
+spec.files = Dir.glob("lib/**/*") + ["package.json"]
+```
+
 ### Usage
 
 The Proscenium registry relies on a lesser known feature of NPM called "scoped packages". This allows you to install packages under a specific namespace, in this case, `@rubygems`.
