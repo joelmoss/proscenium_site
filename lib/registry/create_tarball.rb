@@ -6,6 +6,10 @@ class Registry::CreateTarball
   def initialize(package)
     @package = package
 
+    Rails.logger.info do
+      "[Registry] CreateTarball name=#{@package.name} version=#{@package.version}"
+    end
+
     create!
     upload! if !Rails.env.test?
   end
@@ -25,6 +29,7 @@ class Registry::CreateTarball
     end
 
     def create!
+      Rails.logger.info "[Registry] writing tarball to #{tmp_filepath}"
       FileUtils.mkdir_p(File.dirname(tmp_filepath))
 
       File.open(tmp_filepath, 'wb') do |file|
@@ -39,6 +44,7 @@ class Registry::CreateTarball
     end
 
     def upload!
+      Rails.logger.info "[Registry] uploading tarball key=#{filepath} bucket=#{bucket_name}"
       r2.put_object(
         bucket: bucket_name,
         key: filepath,

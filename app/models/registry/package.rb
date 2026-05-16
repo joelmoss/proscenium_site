@@ -34,6 +34,10 @@ class Registry::Package < ApplicationRecord
     private
 
       def gemspec(name, version = nil)
+        Rails.logger.info do
+          "[Package] fetching gemspec name=#{name.inspect} version=#{version.inspect}"
+        end
+
         version.present? ? Gems::V2.info(name, version) : Gems.info(name)
       rescue Gems::NotFound => e
         msg = "Couldn't find Gem '#{name}'"
@@ -72,6 +76,11 @@ class Registry::Package < ApplicationRecord
 
     def fetch_package_json
       path = Registry::RubyGems.path_for(name, version).join('package.json')
+
+      Rails.logger.info do
+        "[Registry] fetch_package_json name=#{name} version=#{version} exists=#{path.exist?}"
+      end
+
       self.package_data = if path.exist?
                             path.read
                           else
@@ -80,6 +89,8 @@ class Registry::Package < ApplicationRecord
     end
 
     def create_tarball
+      Rails.logger.info "[Registry] create_tarball name=#{name} version=#{version}"
+
       ball = Registry::CreateTarball.new(self)
       self.tarball = ball.tarball
       self.integrity = ball.integrity

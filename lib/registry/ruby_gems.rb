@@ -15,6 +15,8 @@ module Registry
     end
 
     def path
+      Rails.logger.info "[Registry] RubyGems#path name=#{@name} version=#{@version}"
+
       dependency = Gem::Dependency.new @name, @version
       path = get_path dependency
 
@@ -23,6 +25,7 @@ module Registry
       basename = File.basename path, '.gem'
       target_dir = File.expand_path basename, Rails.root.join('tmp/unpacked_gems')
 
+      Rails.logger.info "[Registry] unpacking gem #{path} to #{target_dir}"
       Gem::Package.new(path).extract_files target_dir
 
       target_dir
@@ -46,14 +49,23 @@ module Registry
       specs = dependency.matching_specs
       selected = specs.max_by(&:version)
 
-      return Gem::RemoteFetcher.fetcher.download_to_cache(dependency) if !selected
+      if !selected
+        Rails.logger.info "[Registry] no local spec for #{dependency.name}, downloading..."
+
+        return Gem::RemoteFetcher.fetcher.download_to_cache(dependency)
+      end
+
       return if !/^#{selected.name}$/i.match?(dependency.name)
 
       # We expect to find (basename).gem in the 'cache' directory. Furthermore,
       # the name match must be exact (ignoring case).
       path = find_in_cache File.basename selected.cache_file
 
-      return Gem::RemoteFetcher.fetcher.download_to_cache(dependency) if !path
+      if !path
+        Rails.logger.info "[Registry] cache miss for #{dependency.name}, downloading"
+
+        return Gem::RemoteFetcher.fetcher.download_to_cache(dependency)
+      end
 
       path
     end
