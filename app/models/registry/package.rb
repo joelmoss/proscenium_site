@@ -80,7 +80,7 @@ class Registry::Package < ApplicationRecord
   end
 
   def tarball_url(host)
-    "#{host}/tarballs/#{name}/#{version}"
+    "#{host}/tarballs/#{name}/#{version}.tgz"
   end
 
   def full_name = @full_name ||= "@rubygems/#{name}"

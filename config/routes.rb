@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   # Registry ---
   scope constraints: { subdomain: 'registry' } do
     get 'tarballs/:name/:version', to: 'tarballs#show',
-                                   constraints: { name: /[\w\-_]+/, version: /[\w\-._]+/ }
+                                   constraints: { name: /[\w\-_]+/, version: /[\w\-._]+\.tgz/ }
 
     scope defaults: { format: 'json' }, controller: :packages do
       get '', action: :index

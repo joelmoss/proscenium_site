@@ -15,7 +15,7 @@ class TarballsControllerTest < ActionDispatch::IntegrationTest
       end
 
       it 'redirects to a signed R2 URL' do
-        get '/tarballs/rails/7.0.0'
+        get '/tarballs/rails/7.0.0.tgz'
 
         assert_response :redirect
         assert_equal 'https://signed.test/rails/rails-7.0.0.tgz', response.location
@@ -29,21 +29,21 @@ class TarballsControllerTest < ActionDispatch::IntegrationTest
       end
 
       it 'returns 404' do
-        get '/tarballs/rails/7.0.0'
+        get '/tarballs/rails/7.0.0.tgz'
 
         assert_response :not_found
       end
 
       it 'destroys the cached package' do
         assert_difference 'Registry::Package.count', -1 do
-          get '/tarballs/rails/7.0.0'
+          get '/tarballs/rails/7.0.0.tgz'
         end
       end
     end
 
     context 'invalid version' do
       it 'returns 404 without hitting RubyGems' do
-        get '/tarballs/rails/not-a-version'
+        get '/tarballs/rails/not-a-version.tgz'
 
         assert_response :not_found
       end
