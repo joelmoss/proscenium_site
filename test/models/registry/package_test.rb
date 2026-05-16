@@ -17,6 +17,10 @@ class Registry::PackageTest < ActiveSupport::TestCase
     end
 
     context 'record exists' do
+      before do
+        stub_gem('rails', version: '7.0.0')
+      end
+
       it 'returns record' do
         assert_equal registry_packages(:rails7), described_class.finreate!('rails', '7.0.0')
       end
@@ -25,6 +29,29 @@ class Registry::PackageTest < ActiveSupport::TestCase
         assert_no_difference 'Registry::Package.count' do
           described_class.finreate!('rails', '7.0.0')
         end
+      end
+    end
+
+    context 'cached version was yanked from RubyGems' do
+      before do
+        stub_request(:get, 'https://rubygems.org/api/v2/rubygems/rails/versions/7.0.0.json')
+          .to_return(status: 404, body: 'This version could not be found')
+      end
+
+      it 'raises ActiveRecord::RecordNotFound' do
+        assert_raises(ActiveRecord::RecordNotFound) do
+          described_class.finreate!('rails', '7.0.0')
+        end
+      end
+
+      it 'destroys the cached package' do
+        assert_difference 'Registry::Package.count', -1 do
+          assert_raises(ActiveRecord::RecordNotFound) do
+            described_class.finreate!('rails', '7.0.0')
+          end
+        end
+
+        assert_not Registry::Package.exists?(name: 'rails', version: '7.0.0')
       end
     end
 
@@ -51,12 +78,22 @@ class Registry::PackageTest < ActiveSupport::TestCase
     end
 
     context 'with unknown version' do
-      it 'raises ActiveRecord::RecordNotFound' do
+      before do
         stub_request(:get, 'https://rubygems.org/api/v2/rubygems/rails/versions/1.0.0.json')
           .to_return(status: 404, body: 'This version could not be found')
+      end
 
+      it 'raises ActiveRecord::RecordNotFound' do
         assert_raises(ActiveRecord::RecordNotFound) do
           described_class.finreate!('rails', '1.0.0')
+        end
+      end
+
+      it 'does not change record count' do
+        assert_no_difference 'Registry::Package.count' do
+          assert_raises(ActiveRecord::RecordNotFound) do
+            described_class.finreate!('rails', '1.0.0')
+          end
         end
       end
     end

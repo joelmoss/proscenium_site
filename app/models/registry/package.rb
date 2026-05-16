@@ -23,8 +23,17 @@ class Registry::Package < ApplicationRecord
                 "Couldn't find Gem '#{name}' with version '#{version}'"
         end
 
-        find_by(name:, version:) ||
-          create_or_find_by!(name:, version: gemspec(name, version)['version'])
+        existing = find_by(name:, version:)
+
+        begin
+          spec = gemspec(name, version)
+        rescue ActiveRecord::RecordNotFound
+          # Version was yanked from RubyGems; drop the cached row + tarball.
+          existing&.destroy!
+          raise
+        end
+
+        existing || create_or_find_by!(name:, version: spec['version'])
       else
         # Version not given, so get the latest version.
         find_or_create_by!(name:, version: gemspec(name)['version'])
@@ -47,6 +56,7 @@ class Registry::Package < ApplicationRecord
   end
 
   before_create :fetch_package_json, :create_tarball
+  after_destroy_commit :delete_tarball
 
   def as_json
     {
@@ -95,5 +105,9 @@ class Registry::Package < ApplicationRecord
       self.tarball = ball.tarball
       self.integrity = ball.integrity
       self.shasum = ball.shasum
+    end
+
+    def delete_tarball
+      Registry::DeleteTarball.new(self).call
     end
 end
