@@ -11,7 +11,8 @@ class PackagesController < ActionController::API
   def index = render json: {}
 
   def show
-    render json: Registry::Package.finreate!(*package_params)
+    package = Registry::Package.finreate!(*package_params)
+    render json: package.as_json(tarball_host: request.base_url)
   end
 
   private

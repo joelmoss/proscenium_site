@@ -6,10 +6,14 @@ Rails.application.routes.draw do
   get 'up' => 'rails/health#show', as: :rails_health_check
 
   # Registry ---
-  scope defaults: { format: 'json' }, controller: :packages,
-        constraints: { subdomain: 'registry' } do
-    get '', action: :index
-    get '*package', action: :show, package: /.+/
+  scope constraints: { subdomain: 'registry' } do
+    get 'tarballs/:name/:version', to: 'tarballs#show',
+                                   constraints: { name: /[\w\-_]+/, version: /[\w\-._]+/ }
+
+    scope defaults: { format: 'json' }, controller: :packages do
+      get '', action: :index
+      get '*package', action: :show, package: /.+/
+    end
   end
 
   root to: 'pages#index'

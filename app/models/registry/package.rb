@@ -58,7 +58,7 @@ class Registry::Package < ApplicationRecord
   before_create :fetch_package_json, :create_tarball
   after_destroy_commit :delete_tarball
 
-  def as_json
+  def as_json(tarball_host: nil)
     {
       name: full_name,
       'dist-tags': {
@@ -72,11 +72,15 @@ class Registry::Package < ApplicationRecord
           dist: {
             shasum:,
             integrity:,
-            tarball:
+            tarball: tarball_url(tarball_host)
           }
         }
       }
     }
+  end
+
+  def tarball_url(host)
+    "#{host}/tarballs/#{name}/#{version}"
   end
 
   def full_name = @full_name ||= "@rubygems/#{name}"

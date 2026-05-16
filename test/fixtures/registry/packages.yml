@@ -3,5 +3,5 @@ rails7:
   version: 7.0.0
   integrity: abc123
   shasum: 123abc
-  tarball: some.url
+  tarball: rails/rails-7.0.0.tgz
   package_data: { name: rails, version: 7.0.0 }
