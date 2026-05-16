@@ -9,7 +9,7 @@ class TarballsController < ActionController::API
   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
   def show
-    version = params[:version].delete_suffix('.tgz')
+    version = params.expect(:version).delete_suffix('.tgz')
     package = Registry::Package.finreate!(params[:name], version)
 
     redirect_to Registry::SignTarball.new(package).url, allow_other_host: true
