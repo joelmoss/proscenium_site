@@ -6,7 +6,6 @@ Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   config.hosts << 'proscenium.localhost'
-  config.hosts << 'registry.proscenium.localhost'
 
   # Make code changes take effect immediately without server restart.
   config.enable_reloading = true

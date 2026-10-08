@@ -2,9 +2,7 @@
 
 source 'https://rubygems.org'
 
-gem 'aws-sdk-s3', require: false
 gem 'bootsnap', require: false
-gem 'gems'
 
 gem 'htmlbeautifier'
 gem 'literal'
@@ -30,7 +28,6 @@ group :test do
   gem 'maxitest'
   gem 'minitest-focus'
   gem 'minitest-spec-rails'
-  gem 'webmock'
 end
 
 group :development do

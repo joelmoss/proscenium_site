@@ -37,9 +37,6 @@
 /public/assets/*
 !/public/assets/.keep
 
-/public/proscenium_registry_tarballs/*
-!/public/proscenium_registry_tarballs/.keep
-
 /ssl
 
 # Ignore CI service files.

@@ -5,7 +5,6 @@ ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 require 'rails/test_help'
 require 'maxitest/autorun'
-require 'webmock/minitest'
 
 module ActiveSupport
   class TestCase

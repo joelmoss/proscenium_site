@@ -10,16 +10,5 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_15_232026) do
-  create_table "registry_packages", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "version", null: false
-    t.string "integrity", null: false
-    t.string "shasum", null: false
-    t.string "tarball", null: false
-    t.text "package_data", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["name", "version"], name: "index_registry_packages_on_name_and_version", unique: true
-  end
+ActiveRecord::Schema[8.1].define(version: 2026_10_08_000000) do
 end
