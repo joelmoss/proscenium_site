@@ -8,8 +8,8 @@ if defined?(Sentry)
     config.traces_sample_rate = 1.0
     config.breadcrumbs_logger = %i[active_support_logger http_logger]
 
-    # Add data like request headers and IP for users,
-    # see https://docs.sentry.io/platforms/ruby/data-management/data-collected/ for more info
-    config.send_default_pii = true
+    # Collect data like request headers and IP for users (replaces `send_default_pii = true`).
+    # See https://develop.sentry.dev/sdk/foundations/client/data-collection/
+    config.data_collection = Sentry::DataCollection.new
   end
 end
